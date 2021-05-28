@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_content %}
+    <title>Detail | Concretos Montoya</title>
+{% endblock%}
+<!DOCTYPE html>
+{% block container %}
+
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-2"></div>
+        	<div class="col-md-8" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="card-body">
+                    	<div class="row">
+                    		<div class="col-md-4">
+                    			{% if machine.photo %}
+                    				<img src="{{ machine.photo.url }}" class="rounded-circle" style="width: 180px; height: 180px;" />
+                    			{% else %}
+                    				<img src="{% static 'img/default_machine.jpg' %}" class="rounded-circle" />
+                    			{% endif %}
+                    		</div>
+                    		<div class="col-md-8">
+                    			<h5 class="card-title">{{ machine.name }}</h5>
+			                    <p class="card-text" style="height: 60px;">
+			                    	{{ machine.description }}
+			                    </p>
+                    		</div>
+                    	</div>
+                      
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <strong>Número de serie:</strong> {{ machine.serial_number }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Modelo:</strong> {{ machine.model }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Price de compra:</strong> {{ machine.price }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Tipo:</strong> {{ machine.machine_type }}
+                      </li>
+                      {% if machine.is_available %}
+                        <li class="list-group-item">
+                          <strong>Estatus:</strong> 
+                          <span class="bg-success" style="border:none; color: white; padding: 2px; border-radius: 5px; "><b>Disponible</b></span>
+                        </li>
+                      {% else %}
+                        <li class="list-group-item">
+                          <strong>Estatus:</strong> 
+                          <span class="bg-warning" style="border:none; color: white; padding: 2px; border-radius: 5px; "><b>En renta</b></span>
+                        </li>
+                      {% endif %}
+                      <li class="list-group-item">
+                        <strong>Precio de renta:</strong> {{ machine.rent_price }}
+                      </li>
+                    </ul>
+                    <div class="card-footer">
+                      <button class="btn btn-primary">Editar</button>
+                      {% if machine.is_available %}
+                        <button class="btn btn-primary">Rentar</button>
+                      {% endif %}
+                      <a href="{% url 'machines:feed' %}" class="btn btn-primary">Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

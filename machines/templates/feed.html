@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
+{% endblock %}
+
+{% block head_content %}
+    <title>Machines | Concretos Montoya</title>
+{% endblock %}
+
+{% block container %}
+    <div style="margin-left: 4%;">
+      <h3>Máquinas</h3>
+      <div class="row">
+        {% for machine in machines %}
+            <div class="col-md-3">
+                <div class="card" >
+                    {% if machine.photo %}
+                      <img
+                        src="{{ machine.photo.url }}"
+                        class="card-img-top"
+                        alt="..."
+                        style="height: 180px;"
+                      />
+                    {% else %}
+                      <img
+                        src="{% static 'img/default_machine.jpg' %}"
+                        class="card-img-top"
+                        alt="..."
+                        style="height: 180px;"
+                      />
+                    {% endif %}
+                    <div class="card-body">
+                      <h5 class="card-title">{{ machine.name }}</h5>
+                      <p class="card-text" style="height: 60px;">
+                        {{ machine.description }}
+                      </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <strong>Número de serie:</strong> {{ machine.serial_number }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Modelo:</strong> {{ machine.model }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Price de compra:</strong> {{ machine.price }}
+                      </li>
+                      <li class="list-group-item">
+                        <strong>Tipo:</strong> {{ machine.machine_type }}
+                      </li>
+                      {% if machine.is_available %}
+                        <li class="list-group-item">
+                          <strong>Estatus:</strong> 
+                          <span class="bg-success" style="border:none; color: white; padding: 2px; border-radius: 5px; "><b>Disponible</b></span>
+                        </li>
+                      {% else %}
+                        <li class="list-group-item">
+                          <strong>Estatus:</strong> 
+                          <span class="bg-warning" style="border:none; color: white; padding: 2px; border-radius: 5px; "><b>En renta</b></span>
+                        </li>
+                      {% endif %}
+                      <li class="list-group-item">
+                        <strong>Precio de renta:</strong> {{ machine.rent_price }}
+                      </li>
+                    </ul>
+                    <div class="card-footer">
+                      <button class="btn btn-primary">Editar</button>
+                      {% if machine.is_available %}
+                        <button class="btn btn-primary">Rentar</button>
+                      {% endif %}
+                      <a href="{% url 'machines:detail' machine.pk %}" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <div class="zoom">
+      <a class="zoom-fab zoom-btn-large" id="zoomBtn"><i class="fa fa-bars"></i></a>
+      <ul class="zoom-menu">
+        <li><a href="{% url 'machines:create' %}" class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><i class="fa fa-plus"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><i class="fa fa-edit"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><i class="fa fa-book"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><i class="fa fa-dashboard"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><i class="fa fa-bell"></i></a></li>
+      </ul>
+      <div class="zoom-card scale-transition scale-out">
+        <ul class="zoom-card-content">
+        <li>Content</li>
+        <li>Content</li>
+        <li>Content</li>
+        <li>Content</li>
+        <li>Content</li>
+        </ul>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}
