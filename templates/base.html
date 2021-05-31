@@ -18,7 +18,16 @@
   	<nav class="main-menu">
             <ul>
                 <li>
-                    <a href="http://justinfarrow.com">
+                    <a href="">
+                        <i><img src="{{ request.user.profile.picture.url }}" class="rounded-circle fa-2x" style="width: 30px; height: 30px; margin-left: 15px;"></i>
+                        <span class="nav-text">
+                            {{ request.user.username }}
+                        </span>
+                    </a>
+                  
+                </li>
+                <li>
+                    <a href="">
                         <i class="fa fa-home fa-2x"></i>
                         <span class="nav-text">
                             Dashboard

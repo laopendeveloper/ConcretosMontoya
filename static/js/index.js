@@ -5,6 +5,27 @@ $('#zoomBtn').click(function() {
   }
 });
 
+$('#machine_search').on('keyup', function() {
+	console.log($(this).val());
+	var value = $(this).val();
+
+	$('.machine_list div').filter(function(){
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+	});
+});
+
+$('#machine_status_search').on('change', function() {
+	var value = $(this).val();
+
+	if (value === 'En renta' || value === 'Disponible') {
+
+		console.log(value);
+		$('.machine_list div').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+		});
+	}
+});
+
 // $('.zoom-btn-sm').click(function() {
 //   var btn = $(this);
 //   var card = $('.zoom-card');

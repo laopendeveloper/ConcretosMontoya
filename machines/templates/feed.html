@@ -4,7 +4,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
-<!-- <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> -->
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block head_content %}
@@ -12,11 +12,28 @@
 {% endblock %}
 
 {% block container %}
-    <div style="margin-left: 4%;">
-      <h3>Máquinas</h3>
-      <div class="row">
+    <div style="margin-left: 3.3%;">
+
+      <!-- search nav -->
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <form class="d-flex">
+            <input class="form-control me-2" id="machine_search" type="search" placeholder="Buscar" aria-label="Search">
+            <select class="form-control me-2" id="machine_status_search">
+              <option>-----------</option>
+              <option>En renta</option>
+              <option>Disponible</option>
+            </select>
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+          <a class="navbar-brand">Máquinas</a>
+        </div>
+      </nav>
+      <!-- end search nav -->
+
+      <div class="row machine_list" style="margin-top: 5px;">
         {% for machine in machines %}
-            <div class="col-md-3">
+            <div class="col-md-3" id="{{machine.name}}">
                 <div class="card" >
                     {% if machine.photo %}
                       <img
@@ -34,10 +51,21 @@
                       />
                     {% endif %}
                     <div class="card-body">
-                      <h5 class="card-title">{{ machine.name }}</h5>
-                      <p class="card-text" style="height: 60px;">
-                        {{ machine.description }}
-                      </p>
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-title">{{ machine.name }}</h5>
+                        </div>
+                        <div class="col">
+                          <a href="{% url 'machines:detail' machine.pk %}" style="float: right;" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver detalles">
+                            <i class="fa fa-bars"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <p class="card-text" style="height: 60px;">
+                          {{ machine.description }}
+                        </p>
+                      </div>
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">
@@ -47,7 +75,7 @@
                         <strong>Modelo:</strong> {{ machine.model }}
                       </li>
                       <li class="list-group-item">
-                        <strong>Price de compra:</strong> {{ machine.price }}
+                        <strong>Precio de compra:</strong> {{ machine.price }}
                       </li>
                       <li class="list-group-item">
                         <strong>Tipo:</strong> {{ machine.machine_type }}
@@ -67,13 +95,12 @@
                         <strong>Precio de renta:</strong> {{ machine.rent_price }}
                       </li>
                     </ul>
-                    <div class="card-footer">
-                      <button class="btn btn-primary">Editar</button>
-                      {% if machine.is_available %}
-                        <button class="btn btn-primary">Rentar</button>
-                      {% endif %}
-                      <a href="{% url 'machines:detail' machine.pk %}" class="btn btn-primary">Detalles</a>
-                    </div>
+                    <!-- <div class="card-footer"> -->
+                      <!-- <button class="btn btn-primary">Editar</button> -->
+                      <!-- <a href="{% url 'machines:detail' machine.pk %}" class="btn btn-primary" style="float: right;">
+                        <i class="fa fa-bars"></i>
+                      </a> -->
+                    <!-- </div> -->
                 </div>
             </div>
         {% endfor %}
@@ -86,8 +113,8 @@
       <ul class="zoom-menu">
         <li><a href="{% url 'machines:create' %}" class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><i class="fa fa-plus"></i></a></li>
         <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><i class="fa fa-edit"></i></a></li>
-        <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><i class="fa fa-book"></i></a></li>
-        <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><i class="fa fa-dashboard"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><i class="fa fa-calendar"></i></a></li>
+        <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><i class="fa fa-calendar"></i></a></li>
         <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><i class="fa fa-bell"></i></a></li>
       </ul>
       <div class="zoom-card scale-transition scale-out">
