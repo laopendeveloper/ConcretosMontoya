@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head_content %}
-    <title>Detail | Concretos Montoya</title>
+    <title>Detalles | Concretos Montoya</title>
 {% endblock%}
 <!DOCTYPE html>
 {% block container %}
@@ -22,12 +22,27 @@
                     				<img src="{% static 'img/default_machine.jpg' %}" class="rounded-circle" />
                     			{% endif %}
                     		</div>
-                    		<div class="col-md-8">
+                    		<div class="col-md-4">
                     			<h5 class="card-title">{{ machine.name }}</h5>
 			                    <p class="card-text" style="height: 60px;">
 			                    	{{ machine.description }}
 			                    </p>
                     		</div>
+                        <div class="col-md-4">
+                          <!-- <div style="margin-right: 0;"> -->
+                            <a href="{% url 'machines:update' machine.pk %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                              <i class="fa fa-edit fa-2x"></i>
+                            </a>
+                            {% if machine.is_available %}
+                              <a href="{% url 'machines:rent' machine.pk %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Rentar">
+                                <i class="fa fa-shopping-cart fa-2x"></i>
+                              </a>
+                            {% endif %}
+                            <a href="{% url 'machines:feed' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="regrresar">
+                              <i class="fa fa-undo fa-2x"></i>
+                            </a>
+                          <!-- </div> -->
+                        </div>
                     	</div>
                       
                     </div>
@@ -59,13 +74,6 @@
                         <strong>Precio de renta:</strong> {{ machine.rent_price }}
                       </li>
                     </ul>
-                    <div class="card-footer">
-                      <button class="btn btn-primary">Editar</button>
-                      {% if machine.is_available %}
-                        <button class="btn btn-primary">Rentar</button>
-                      {% endif %}
-                      <a href="{% url 'machines:feed' %}" class="btn btn-primary">Regresar</a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -24,5 +24,17 @@ urlpatterns = [
         route='machines/<int:pk>/',
         view=views.MachineDetailView.as_view(),
         name='detail'
+    ),
+
+    path(
+        route='machines/update/<int:pk>/',
+        view=views.UpdateMachineView.as_view(),
+        name='update'
+    ),
+
+    path(
+        route='machines/rent/<int:pk>/',
+        view=views.RentMachineView.as_view(),
+        name='rent'
     )
 ]

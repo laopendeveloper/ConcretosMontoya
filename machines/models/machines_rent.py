@@ -3,7 +3,7 @@ from django.db import models
 
 class Rent(models.Model):
 
-	client = model.CharField(
+	client = models.CharField(
 		max_length=255,
 		blank=False,
 		null=False

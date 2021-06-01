@@ -33,7 +33,11 @@
 
       <div class="row machine_list" style="margin-top: 5px;">
         {% for machine in machines %}
-            <div class="col-md-3" id="{{machine.name}}">
+            {% if machine.is_available %}
+              <div class="col-md-3 available" id="{{machine.name}}">
+            {% else %}
+              <div class="col-md-3 not-available" id="{{machine.name}}">
+            {% endif %}
                 <div class="card" >
                     {% if machine.photo %}
                       <img

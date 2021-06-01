@@ -20,9 +20,19 @@ $('#machine_status_search').on('change', function() {
 	if (value === 'En renta' || value === 'Disponible') {
 
 		console.log(value);
-		$('.machine_list div').filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-		});
+		// $('.machine_list div').filter(function() {
+		// 	$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+		// });
+		if ( value === 'En renta' ) {
+			$('.not-available').show(500);
+			$('.available').hide(500);
+		} else if ( value === 'Disponible' ) {
+			$('.not-available').hide(500);
+			$('.available').show(500);
+		}
+	} else {
+		$('.not-available').show(500);
+		$('.available').show(500);
 	}
 });
 
