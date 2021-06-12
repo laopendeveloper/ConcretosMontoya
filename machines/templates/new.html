@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block container %}
-    <div class="row" style="margin-top: 2em;">
+    <div class="row">
         <div class="col-lg-3"></div>
-        <div class="col-lg-6 justify-content-center">
+        <div class="col-lg-6 justify-content-center" style="margin-top: 20px;">
 
             <div class="card">
               <div class="card-body">
@@ -41,7 +43,7 @@
               </div>
               <div class="card-footer">
                 <input class="btn btn-primary" type="submit" value="Guardar">
-                <a href="{% url 'machines:feed' %}" class="btn btn-danger">Cancelar</a>
+                <a href="{% url 'machines:feed' %}" class="btn btn-danger" id="btn-cancel">Cancelar</a>
               </div>
             </form>
             </div>

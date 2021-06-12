@@ -9,11 +9,13 @@ from django.forms import (
 	Textarea,
 	NumberInput,
 	Select,
-	FileInput
+	FileInput,
+    DateTimeInput
 )
+from datetimewidget.widgets import DateTimeWidget
 
 # Models
-from machines.models import Machine
+from machines.models import Machine, Rent
 
 
 class MachineForm(ModelForm):

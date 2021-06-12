@@ -1,5 +1,72 @@
 {% extends "base.html" %}
 
-{% block container %}
+{% load static %}
 
+{% block styles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.min.css' %}">
+    <style type="text/css">
+        .hidden-input{
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 justify-content-center" style="margin-top: 20px;">
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Rentar máquina</h5>
+                <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.errors }}
+                    <div class="form-group">
+                        <label>Cliente:</label>
+                        {{ form.client }}
+                    </div>
+                    <div class="form-group">
+                        <!-- <label>Maquina:</label> -->
+                        {{ form.machine }}
+                    </div>
+                    <div class="form-group">
+                        <label>Rentar desde:</label>
+                        {{ form.rent_from }}
+                        <!-- <input type="datetime-local" name="rent_from" id="id_rent_from" class="form-control"> -->
+                    </div>
+                    <div class="form-group">
+                        <label>Rentar hasta:</label>
+                         <!-- <input type="datetime-local" name="rent_to" id="id_rent_to" class="form-control"> -->
+                         {{ form.rent_to }}
+                    </div>
+                    <div class="form-group">
+                        <label>Notas:</label>
+                        {{ form.notes }}
+                        <!-- <textarea name="notes" id="id_notes" class="form-control"> -->
+                        	
+                        <!-- </textarea> -->
+                    </div>
+              </div>
+              <div class="card-footer">
+                <input class="btn btn-primary" type="submit" value="Rentar">
+                <a href="{% url 'machines:feed' %}" class="btn btn-danger">Cancelar</a>
+              </div>
+            </form>
+            </div>
+            
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.datetimepicker.full.js' %}"></script>
+	<script>
+      $(function () {
+        $('#datetimepicker1').datetimepicker({});
+        $('#datetimepicker2').datetimepicker({});
+      });
+    </script>
 {% endblock %}
