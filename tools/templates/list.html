@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block styles %}
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+<script src="https://use.fontawesome.com/c3a6cfe937.js"></script>
+{% endblock %}
+
+{% block head_content %}
+    <title>Herramientas | Concretos Montoya</title>
+{% endblock %}
+
+{% block container %}
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="margin-top:20px;">
+          <div class="card">
+            <div class="card-header">
+              Lista de Herramientas
+              <a href="{% url 'tools:create' %}" class="btn btn-primary" style="float:right;">Agregar nueva herramienta</a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Title</h5>
+              <table id="tools_table" class="table table-stripped" cellspacing="0" width="100%">
+                
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th><center>Imagen</center></th>
+                    <th>Fecha de creación</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for tool in tools %}
+                    <tr>
+                      <td>{{ tool.name }}</td>
+                      <td>{{ tool.tool_type }}</td>
+                      <td>
+                        <center>
+                          <img src="{{ tool.picture.url }}" class="" width="30px" height="30px">
+                        </center>
+                      </td>
+                      <td>{{ tool.created }}</td>
+                      <td>
+                        <a href=""><i class="far fa-edit"></i></a>
+                        <a href=""><i class="far fa-trash-alt"></i></a>
+                        <a href=""><i class="fas fa-bars"></i></a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#tools_table').DataTable();
+  } );
+</script>
+{% endblock %}
